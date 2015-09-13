@@ -25,23 +25,38 @@ This is still evolving, the last evolution was:
 Installation
 ============
 
-I followed this to hookup the nfc thing:
+Setup WiFi
+----------
 
-https://learn.adafruit.com/raspberry-pi-nfc-minecraft-blocks/library-installation
+According to [this](https://techblog.willshouse.com/2013/06/11/solved-raspbian-with-edimax-ew-7811un-wifi-adapter-and-802-1x-authentication/)
+
+You should now be able to ssh into your raspberry pi.
+
+Update Software & Pull Libraries
+--------------------------------
 
 Run this:
 
     sudo apt-get update
     sudo apt-get install build-essential python-dev git
-    cd ~
-    git clone https://github.com/adafruit/Adafruit_Python_PN532.git
-    cd Adafruit_Python_PN532
-    sudo python setup.py install
 
-Run this:
+Mount the USB Flash Drive
+-------------------------
 
-    cd examples
-    sudo python readmifare.py
+create the mount
+
+    cd /mnt
+    sudo mkdir bigdaddy
+    sudo mount -o uid=pi,gid=pi /dev/sda1 /mnt/bigdaddy
+    sudo vi /etc/fstab
+
+        add this line:
+        /dev/sda1 /mnt/bigdaddy vfat uid=pi,gid=pi,umask=0022,sync,auto,nosuid,rw,nouser 0 0
+
+Try it out, you should see everything on the flash drive under /mnt/bigdaddy
+
+Setting Up Audio
+----------------
 
 For MP3, read this:
 
@@ -60,17 +75,32 @@ Setup the audio port:
     sudo modprobe snd_bcm2835
     sudo amixer cset numid=3 1
 
-create the mount
-
-    cd /mnt
-    sudo mkdir music
-    sudo mount -o uid=pi,gid=pi /dev/sda1 /mnt/music
-    sudo vi /etc/fstab
-
-        add this line:
-        /dev/sda1 /mnt/music vfat uid=pi,gid=pi,umask=0022,sync,auto,nosuid,rw,nouser 0 0
 
 install mpd & mpc
     sudo apt-get alsa-utils mpd mpc
     sudo modprobe snd_bcm2835
     sudo nano /etc/mpd.conf
+
+Downloading our software
+------------------------
+
+Setting up the NFC Card
+-----------------------
+
+I followed this to hookup the nfc thing:
+
+https://learn.adafruit.com/raspberry-pi-nfc-minecraft-blocks/library-installation
+
+Run this:
+
+    cd ~
+    git clone https://github.com/adafruit/Adafruit_Python_PN532.git
+    cd Adafruit_Python_PN532
+    sudo python setup.py install
+
+Run this:
+
+    cd examples
+    sudo python readmifare.py
+
+
