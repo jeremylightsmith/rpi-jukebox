@@ -1,3 +1,7 @@
+# Jeremy's Jukebox 2.0
+# Author: Jeremy Lightsmith
+# Copyright (c) 2015 Jeremy Lightsmith
+
 import sys
 
 try:

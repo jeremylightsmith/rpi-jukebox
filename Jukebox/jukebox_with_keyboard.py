@@ -4,22 +4,42 @@
 
 import time
 import sys
+from Queue import Queue
+from threading import Thread
 
-datadir = "/mnt/music"
-# datadir = "../music"
+# datadir = "/home/pi/music"
+datadir = "../music"
 
 from music import MusicPlayer
-player = MusicPlayer(datadir + "/music")
+player = MusicPlayer(datadir)
 
 print "Welcome to Jeremy's Jukebox 2.0"
 print ''
 
 
-from nfc import CardReader
-reader = CardReader(datadir)
+q = Queue()
 
-# from keyboard import KeyboardReader
-# reader = KeyboardReader()
+
+from keyboard import KeyboardReader
+keyboard_reader = KeyboardReader()
+def read_keys():
+    while True:
+        q.put(keyboard_reader.read())
+
+t = Thread(name="keys", target=read_keys)
+t.daemon = True
+t.start()
+
+
+# from nfc import CardReader
+# card_reader = CardReader(datadir)
+# def read_cards():
+#     while True:
+#         q.put(card_reader.read())
+
+# t = Thread(name="cards", target=read_cards)
+# t.daemon = True
+# t.start()
 
 
 def up(event):
@@ -59,8 +79,10 @@ dispatch = {
 
 
 while True:
-    event = reader.read()
+    event = q.get()
 
     dispatch[event[0]](event)
+
+    q.task_done()
 
 
