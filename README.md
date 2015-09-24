@@ -21,6 +21,7 @@ This is still evolving, the last evolution was:
 * [CY Case for Raspberry Pi](http://www.amazon.com/gp/product/B00P2V8ZGI?psc=1&redirect=true&ref_=oh_aui_detailpage_o02_s00)
 * [Mifare RFID cards](http://www.amazon.com/gp/product/B00NN6UTKY?psc=1&redirect=true&ref_=oh_aui_detailpage_o06_s00)
 * [Card protector sleeves](http://www.amazon.com/gp/product/B00B7TUIFA?psc=1&redirect=true&ref_=oh_aui_detailpage_o04_s00)
+* [HDMI -> Audio converter](http://www.amazon.com/Female-Adapter-Converter-Projector-Notebook/dp/B00IVD019I/ref=sr_1_7?ie=UTF8&qid=1442168128&sr=8-7&keywords=hdmi+to+audio) the audio output on the pi sucks, but HDMI audio is supposed to be better?
 
 Installation
 ============
@@ -86,6 +87,8 @@ Downloading our software
 
 Setting up the NFC Card
 -----------------------
+
+*New* : https://github.com/mxgxw/MFRC522-python
 
 I followed this to hookup the nfc thing:
 
