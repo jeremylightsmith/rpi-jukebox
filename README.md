@@ -59,7 +59,7 @@ Try it out, you should see everything on the flash drive under /mnt/bigdaddy
 Setting Up Audio
 ----------------
 
-For MP3, read this:
+<!-- For MP3, read this:
 
 https://learn.adafruit.com/playing-sounds-and-using-buttons-with-raspberry-pi/install-python-module-rpi-dot-gpio
 
@@ -81,14 +81,65 @@ install mpd & mpc
     sudo apt-get alsa-utils mpd mpc
     sudo modprobe snd_bcm2835
     sudo nano /etc/mpd.conf
+ -->
 
 Downloading our software
 ------------------------
 
+create an ssh key
+
+    ssh-keygen
+
+add your public key as a deploy key in the project
+
+    git clone git@github.com:jeremylightsmith/rpi-jukebox.git
+
 Setting up the NFC Card
 -----------------------
 
+enable spi 
+
+    sudo raspi-config
+
+sudo vi /etc/modprobe.d/raspi-blacklist.conf
+
 *New* : https://github.com/mxgxw/MFRC522-python
+
+Install SPI-Py
+
+    cd ~
+    git clone git@github.com:lthiery/SPI-Py.git
+    cd SPI-Py
+    sudo python setup.py install
+
+    cd ~
+    git clone https://github.com/mxgxw/MFRC522-python.git
+    cd MFRC522-python
+    sudo python Read.py
+
+
+
+or
+
+    wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.35.tar.gz
+    tar -zxf bcm2835-1.35.tar.gz
+    cd bcm2835-1.35
+    ./configure
+    sudo make install
+
+then
+
+    cd ~
+    sudo apt-get install subversion
+    svn checkout http://rpi-rc522.googlecode.com/svn/trunk/ rpi-rc522-read-only
+    cd rpi-rc522-read-only/rc522
+    gcc config.c rfid.c rc522.c main.c -o rc522_reader -lbcm2835
+    sudo cp RC522.conf /etc/
+    ./rc522_reader -d
+
+
+
+
 
 I followed this to hookup the nfc thing:
 
