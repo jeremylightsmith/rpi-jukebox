@@ -158,3 +158,12 @@ Run this:
     sudo python readmifare.py
 
 
+Take 506
+=========
+
+sudo apt-get install python-dev python-pip gcc
+sudo apt-get install linux-headers-$(uname -r)
+
+
+
+
