@@ -8,7 +8,7 @@ class CardStore:
         self.card_list = self.__load_card_list()
 
     # if it doesn't have an index, assign one
-    def index_of(uid):
+    def index_of(self, uid):
         if not uid in self.card_list:
             self.card_list.append(uid)
             self.__write_card_list()
