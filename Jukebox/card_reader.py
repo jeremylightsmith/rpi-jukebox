@@ -1,43 +1,21 @@
-import struct
-import time
-import sys
-import threading
+from keyboard_listener import KeyboardListener
 
 KEY_ENTER = 28
 
-class CardReader(threading.Thread):
+class CardReader(KeyboardListener):
   def __init__(self, bus):
-    super(CardReader, self).__init__()
+    super(CardReader, self).__init__("usb-Sycreader_RFID_Technology_Co.__Ltd_SYC_ID_IC_USB_Reader_08FF20140315-event-kbd")
     self.bus = bus
-    self.setDaemon(True)
 
-  def run(self):
-    infile_path = "/dev/input/by-id/usb-Sycreader_RFID_Technology_Co.__Ltd_SYC_ID_IC_USB_Reader_08FF20140315-event-kbd"
-    
-    #long int, long int, unsigned short, unsigned short, unsigned int
-    FORMAT = 'llHHI'
-    EVENT_SIZE = struct.calcsize(FORMAT)
+  def on_event(self, type, value, code):
+    if type == 1 and value == 1:
+      if code == KEY_ENTER:
+        self.bus.put(["card_read", id])
+        id = ""
 
-    in_file = open(infile_path, "rb")
+      elif code == 11:
+        id += `0`
 
-    event = in_file.read(EVENT_SIZE)
-    id = ""
-
-    while event:
-      (tv_sec, tv_usec, type, code, value) = struct.unpack(FORMAT, event)
-
-      if type == 1 and value == 1:
-        if code == KEY_ENTER:
-          self.bus.put(["card_read", id])
-          id = ""
-
-        elif code == 11:
-          id += `0`
-
-        else:
-          id += `code - 1`
-
-      event = in_file.read(EVENT_SIZE)
-
-    in_file.close()
+      else:
+        id += `code - 1`
 
