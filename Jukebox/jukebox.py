@@ -6,7 +6,7 @@ import time
 import sys
 from Queue import Queue
 
-datadir = "/mnt/music"
+datadir = "/mnt/bigdaddy"
 # datadir = "../music"
 
 from music import MusicPlayer
@@ -47,6 +47,7 @@ store = CardStore(datadir)
 
 def card_read(id):
   index = store.index_of(id)
+  print "playing song ", index
   player.play_song(index)
   # print "got card: " + id
 
@@ -75,6 +76,5 @@ while True:
     dispatch[event[0]](*event[1:])
 
   time.sleep(0.5)
-  print ".",
 
 

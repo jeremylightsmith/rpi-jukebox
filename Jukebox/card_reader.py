@@ -28,25 +28,16 @@ class CardReader(threading.Thread):
 
       if type == 1 and value == 1:
         if code == KEY_ENTER:
-          print "submiting"
-          print id
           self.bus.put(["card_read", id])
           id = ""
 
         elif code == 11:
           id += `0`
-          print "id = " + id
 
         else:
           id += `code - 1`
-          print "id = " + id
 
       event = in_file.read(EVENT_SIZE)
 
     in_file.close()
-    # while True:
-    #   id = "1234567890"
-    #   print("read card " + id)
-    #   self.bus.put(["card_read", id])
-    #   time.sleep(10)
 
