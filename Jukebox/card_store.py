@@ -14,7 +14,7 @@ class CardStore:
             self.__write_card_list()
             print "card added"
 
-        return self.card_list.index(uid)
+        return self.card_list.index(uid) + 1
 
     def __load_card_list(self):
         if os.path.isfile(self.card_list_file):

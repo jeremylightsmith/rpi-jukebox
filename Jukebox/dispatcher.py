@@ -16,10 +16,10 @@ class Dispatcher:
     self.player.stop_song()
   
   def next_song(self):
-    print "next_song"
+    self.player.next_song()
   
   def previous_song(self):
-    print "previous_song"
+    self.player.previous_song()
   
   def repeat(self):
     print "repeat"
@@ -31,6 +31,7 @@ class Dispatcher:
     print "play"
   
   def quit(self):
+    self.player.stop_song()
     exit(0)
 
   def dispatch(self, event):

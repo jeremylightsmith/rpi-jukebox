@@ -94,5 +94,12 @@ sudo apt-get install python-dev python-pip gcc
 sudo apt-get install linux-headers-$(uname -r)
  -->
 
+Start on boot
+-------------
+
+    sudo apt-get install daemontools daemontools-run
+
+
+
 
 
