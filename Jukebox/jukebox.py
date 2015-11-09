@@ -9,9 +9,9 @@ print ''
 
 q = Queue()
 
-# CardReader(q).start()
-# RemoteListener(q).start()
-# Dispatcher("/mnt/bigdaddy").run(q)
+CardReader(q).start()
+RemoteListener(q).start()
+Dispatcher("/mnt/bigdaddy").run(q)
 
-KeyboardListener(q).start()
-Dispatcher("/Users/jeremy/src/jukebox").run(q)
+# KeyboardListener(q).start()
+# Dispatcher("/Users/jeremy/src/jukebox").run(q)

@@ -98,8 +98,5 @@ Start on boot
 -------------
 
     sudo apt-get install daemontools daemontools-run
-
-
-
-
-
+    cd /etc/service/
+    sudo ln -s /home/pi/jukebox/bin/jukebox .
