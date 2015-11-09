@@ -78,7 +78,8 @@ class MusicPlayer:
       self.player.start()
 
   def stop_song(self):
-    pid = self.__lookup_mpg123_pid()
-    if pid != None:
-      print "stopping song (pid: ", pid, ")"
-      subprocess.Popen("kill %s" % pid, shell=True).wait()
+    pids = self.__lookup_mpg123_pid()
+    if pids != None:
+      for pid in pids.split("\n"):
+        print "stopping song (pid: ", pid, ")"
+        subprocess.Popen("kill %s" % pid, shell=True).wait()
