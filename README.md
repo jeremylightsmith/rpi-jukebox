@@ -86,8 +86,11 @@ create an ssh key
 
 add your public key as a deploy key in the project
 
-    git clone git@github.com:jeremylightsmith/rpi-jukebox.git
+    git clone git@github.com:jeremylightsmith/rpi-jukebox.git jukebox
 
+try it by
+
+    jukebox/bin/jukebox
 
 <!-- 
 sudo apt-get install python-dev python-pip gcc
@@ -97,6 +100,8 @@ sudo apt-get install linux-headers-$(uname -r)
 Start on boot
 -------------
 
-    sudo apt-get install daemontools daemontools-run
-    cd /etc/service/
-    sudo ln -s /home/pi/jukebox/bin/jukebox .
+    sudo vi /etc/rc.local
+
+add this line:
+
+    /home/pi/jukebox/bin/jukebox &
