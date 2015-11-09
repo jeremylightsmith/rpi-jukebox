@@ -2,15 +2,16 @@ from Queue import Queue
 from card_reader import CardReader
 from remote_listener import RemoteListener
 from keyboard_listener import KeyboardListener
-from dispatcher import start_dispatching
+from dispatcher import Dispatcher
 
 print "Welcome to Jeremy's Jukebox 3.0"
 print ''
 
 q = Queue()
 
-CardReader(q).start()
-RemoteListener(q).start()
-# KeyboardListener(q).start()
+# CardReader(q).start()
+# RemoteListener(q).start()
+# Dispatcher("/mnt/bigdaddy").run(q)
 
-start_dispatching(q)
+KeyboardListener(q).start()
+Dispatcher("/Users/jeremy/src/jukebox").run(q)

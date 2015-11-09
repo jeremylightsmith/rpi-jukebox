@@ -1,65 +1,50 @@
 import time
-
-datadir = "/mnt/bigdaddy"
-
 from music import MusicPlayer
-player = MusicPlayer(datadir + "/music")
-
 from card_store import CardStore
-store = CardStore(datadir)
 
-def card_read(id):
-  index = store.index_of(id)
-  print "playing song ", index
-  player.play_song(index)
+class Dispatcher:
+  def __init__(self, datadir):
+    self.player = MusicPlayer(datadir + "/music")
+    self.store = CardStore(datadir)
 
-def stop():
-  player.stop_song()
+  def card_read(self, id):
+    index = self.store.index_of(id)
+    print "playing song ", index
+    self.player.play_song(index)
+  
+  def stop(self):
+    self.player.stop_song()
+  
+  def next_song(self):
+    print "next_song"
+  
+  def previous_song(self):
+    print "previous_song"
+  
+  def repeat(self):
+    print "repeat"
+  
+  def no_repeat(self):
+    print "no_repeat"
+  
+  def play(self):
+    print "play"
+  
+  def quit(self):
+    exit(0)
 
-def next_song():
-  print "next_song"
+  def dispatch(self, event):
+    handler = getattr(self, event[0], None)
+    if handler is None:
+      print "Couldn't find handler for ", event[0]
+    else:
+      handler(*event[1:])
 
-def previous_song():
-  print "previous_song"
+  def run(self, bus):
+    while True:
+      while not bus.empty():
+        self.dispatch(bus.get())
 
-def repeat():
-  print "repeat"
-
-def no_repeat():
-  print "no_repeat"
-
-def play():
-  print "play"
-
-def quit():
-  exit(0)
-
-handlers = {
-  'card_read': card_read,
-  'stop': stop,
-  'next_song': next_song,
-  'previous_song': previous_song,
-  'repeat': repeat,
-  'no_repeat': no_repeat,
-  'play': play,
-  'quit': quit,
-
-  # 'first_song':first_song,
-  # 'last_song':last_song,
-  # 'volume_down':volume_down,
-  # 'volume_up':volume_up,
-  # 'home':home,
-}
-
-def dispatch(event):
-  if event[0] in handlers:
-    handlers[event[0]](*event[1:])
-
-def start_dispatching(bus):
-  while True:
-    while not bus.empty():
-      dispatch(bus.get())
-
-    time.sleep(0.25)
+      time.sleep(0.25)
 
 

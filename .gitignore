@@ -2,3 +2,4 @@ Adafruit_Python_PN532
 *.pyc
 music
 Images.pages
+cards.txt
