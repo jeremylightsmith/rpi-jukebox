@@ -3,8 +3,9 @@ from music import MusicPlayer
 from card_store import CardStore
 
 class Dispatcher:
-  def __init__(self, datadir):
-    self.player = MusicPlayer(datadir + "/music")
+  def __init__(self, bus, datadir):
+    self.bus = bus
+    self.player = MusicPlayer(datadir, bus)
     self.store = CardStore(datadir)
 
   def card_read(self, id):
@@ -18,14 +19,23 @@ class Dispatcher:
   def next_song(self):
     self.player.next_song()
   
+  def first_song(self):
+    self.player.first_song()
+  
+  def last_song(self):
+    self.player.last_song()
+  
   def previous_song(self):
     self.player.previous_song()
-  
+
+  def finished_song(self):
+    self.player.finished_song()
+
   def repeat(self):
-    print "repeat"
-  
+    self.player.set_repeating(True)
+
   def no_repeat(self):
-    print "no_repeat"
+    self.player.set_repeating(False)
   
   def play(self):
     print "play"
@@ -41,11 +51,9 @@ class Dispatcher:
     else:
       handler(*event[1:])
 
-  def run(self, bus):
+  def start(self):
     while True:
-      while not bus.empty():
-        self.dispatch(bus.get())
+      while not self.bus.empty():
+        self.dispatch(self.bus.get())
 
       time.sleep(0.25)
-
-

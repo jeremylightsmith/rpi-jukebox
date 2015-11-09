@@ -13,6 +13,8 @@ class KeyboardListener(threading.Thread):
         68: ["previous_song"],
         13: ["play"],
         ord('s'): ["stop"],
+        ord('r'): ["repeat"],
+        ord('n'): ["no_repeat"],
         ord('q'): ["quit"],
         ord('0'): ["card_read", "0"],
         ord('1'): ["card_read", "1"],
