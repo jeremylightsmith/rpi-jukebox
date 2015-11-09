@@ -26,43 +26,44 @@ from remote_listener import RemoteListener
 from card_store import CardStore
 store = CardStore(datadir)
 
-# def up(event):
-#     print("up")
-
-# def right(event):
-#     print("right")
-
-# def down(event):
-#     print("down")
-
-# def left(event):
-#     print("left")
-
-# def enter(event):
-#     print("enter")
-
-# def quit(event):
-#     print("quit")
-#     sys.exit()
-
 def card_read(id):
   index = store.index_of(id)
   print "playing song ", index
   player.play_song(index)
-  # print "got card: " + id
 
-def next():
-  print "got next"
+def stop():
+  player.stop_song()
 
-# def card(event):
-#     player.play_song(event[1])
+def next_song():
+  print "next_song"
 
-# def stop(event):
-#     player.stop_song()
+def previous_song():
+  print "previous_song"
+
+def repeat():
+  print "repeat"
+
+def no_repeat():
+  print "no_repeat"
+
+def play():
+  print "play"
 
 dispatch = {
   'card_read': card_read,
-  'next': next
+  'stop': stop,
+  'next_song': next_song,
+  'previous_song': previous_song,
+  'repeat': repeat,
+  'no_repeat': no_repeat,
+  'play': play,
+
+  # 'first_song':first_song,
+  # 'last_song':last_song,
+  # 'volume_down':volume_down,
+  # 'volume_up':volume_up,
+  # 'home':home,
+
 }
 
 q = Queue()
@@ -73,8 +74,9 @@ RemoteListener(q).start()
 while True:
   while not q.empty():
     event = q.get()
-    dispatch[event[0]](*event[1:])
+    if event[0] in dispatch:
+      dispatch[event[0]](*event[1:])
 
-  time.sleep(0.5)
+  time.sleep(0.25)
 
 
