@@ -88,12 +88,11 @@ add your public key as a deploy key in the project
 
     git clone git@github.com:jeremylightsmith/rpi-jukebox.git
 
-Take 506
-=========
 
+<!-- 
 sudo apt-get install python-dev python-pip gcc
 sudo apt-get install linux-headers-$(uname -r)
-
+ -->
 
 
 

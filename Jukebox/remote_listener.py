@@ -1,4 +1,4 @@
-from keyboard_listener import KeyboardListener
+from dev_input_listener import DevInputListener
 
 CODE_TO_EVENTS = {
   116: "stop",
@@ -17,7 +17,7 @@ CODE_TO_EVENTS = {
   172: "home"
 }
 
-class RemoteListener(KeyboardListener):
+class RemoteListener(DevInputListener):
   def __init__(self, bus):
     super(RemoteListener, self).__init__("usb-HBGIC_Technology_Co.__Ltd._USB_Keyboard_Mouse-event-kbd")
     self.bus = bus
