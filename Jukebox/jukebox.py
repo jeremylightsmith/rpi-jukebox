@@ -9,8 +9,8 @@ print ''
 
 q = Queue()
 
-# CardReader(q).start()
-# RemoteListener(q).start()
-KeyboardListener(q).start()
+CardReader(q).start()
+RemoteListener(q).start()
+# KeyboardListener(q).start()
 
 start_dispatching(q)
