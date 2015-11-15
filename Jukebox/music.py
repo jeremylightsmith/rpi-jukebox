@@ -88,18 +88,22 @@ class MusicPlayer:
       self.track = len(self.songs) - 1
       self.__play()
 
-  def set_repeating(self, value):
-    self.repeating = value
-    if value:
+  def toggle_repeating(self):
+    self.repeating = !self.repeating
+    if self.repeating:
       self.play_sound("repeating_on")
     else:
       self.play_sound("repeating_off")
 
   def play_song(self, card):
-    self.songs = self.__lookup_songs(card)
-    self.track = 0
-    if self.songs:
-      self.__play()
+    if self.song_number == card:
+      self.next_song()
+    else:
+      self.song_number = card
+      self.songs = self.__lookup_songs(card)
+      self.track = 0
+      if self.songs:
+        self.__play()
 
   def play_sound(self, name):
     path = os.path.join(self.datadir, "sounds/{0}.mp3".format(name))

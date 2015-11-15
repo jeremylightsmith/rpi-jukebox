@@ -1,6 +1,5 @@
 Adafruit_Python_PN532
 *.pyc
 music
-sounds
 Images.pages
 cards.txt

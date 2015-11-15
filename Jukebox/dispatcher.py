@@ -10,8 +10,13 @@ class Dispatcher:
 
   def card_read(self, id):
     index = self.store.index_of(id)
-    print "playing song ", index
-    self.player.play_song(index)
+    if index == 0:
+      self.stop()
+    elif index == 1:
+      self.player.toggle_repeating()
+    else:
+      print "playing song ", index
+      self.player.play_song(index - 1)
   
   def stop(self):
     self.player.stop_song()
