@@ -4,8 +4,8 @@ CODE_TO_EVENTS = {
   116: "stop",
   106: "next_song",
   105: "previous_song",
-  1: "repeat", 
-  127: "no_repeat",
+  1: "toggle_repeating", 
+  # 127: "no_repeat", context menu
   103: "first_song",
   108: "last_song",
 

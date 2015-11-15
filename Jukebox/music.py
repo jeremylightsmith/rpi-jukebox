@@ -89,7 +89,7 @@ class MusicPlayer:
       self.__play()
 
   def toggle_repeating(self):
-    self.repeating = !self.repeating
+    self.repeating = not self.repeating
     if self.repeating:
       self.play_sound("repeating_on")
     else:

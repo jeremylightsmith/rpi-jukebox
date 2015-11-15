@@ -13,13 +13,16 @@ class Dispatcher:
     if index == 0:
       self.stop()
     elif index == 1:
-      self.player.toggle_repeating()
+      self.toggle_repeating()
     else:
       print "playing song ", index
       self.player.play_song(index - 1)
   
   def stop(self):
     self.player.stop_song()
+
+  def toggle_repeating(self):
+    self.player.toggle_repeating()
   
   def next_song(self):
     self.player.next_song()
@@ -36,12 +39,6 @@ class Dispatcher:
   def finished_song(self):
     self.player.finished_song()
 
-  def repeat(self):
-    self.player.set_repeating(True)
-
-  def no_repeat(self):
-    self.player.set_repeating(False)
-  
   def play(self):
     print "play"
   
