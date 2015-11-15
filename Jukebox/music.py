@@ -32,6 +32,7 @@ class MusicPlayer:
     self.ignore_next_finished_song_event = False
     self.play_sound("i_am_listening")
     self.repeating = False
+    self.song_number = False
 
   def __lookup_mpg123_pid(self):
     pid = subprocess.check_output("ps ax | grep mpg123 | grep -v grep | awk '{print $1;}'", shell=True).strip()
