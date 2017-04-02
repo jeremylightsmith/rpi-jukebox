@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# this script is meant to sync a local music dir + dir in /Volumes/MUSIC/music/
+rsync -aP --delete music/ /Volumes/MUSIC/music
