@@ -35,7 +35,6 @@ Install Raspbian on the Pi
 # Update configuration
     - top left Raspberry > Preferences > Raspberry Pi Configuration
     - boot: To CLI
-    - network at Boot: wait for network
 # Reboot
 
 Preparing your music
