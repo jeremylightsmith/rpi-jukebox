@@ -19,8 +19,8 @@ CODE_TO_EVENTS = {
 
 class RemoteListener(DevInputListener):
   def __init__(self, bus):
-    # super(RemoteListener, self).__init__("usb-HBGIC_Technology_Co.__Ltd._USB_Keyboard_Mouse-event-kbd")
-    super(RemoteListener, self).__init__("usb-Sycreader_RFID_Technology_Co.__Ltd_SYC_ID_IC_USB_Reader_08FF20140315-event-kbd")
+    super(RemoteListener, self).__init__("usb-HBGIC_Technology_Co.__Ltd._USB_Keyboard_Mouse-event-kbd")
+    # super(RemoteListener, self).__init__("usb-Sycreader_RFID_Technology_Co.__Ltd_SYC_ID_IC_USB_Reader_08FF20140315-event-kbd")
     self.bus = bus
 
 

@@ -12,28 +12,31 @@ Kit
 
 This is still evolving, the last evolution was:
 
-* [Raspberry Pi 2](http://www.amazon.com/gp/product/B00T2U7R7I?psc=1&redirect=true&ref_=oh_aui_detailpage_o07_s00) $39
-* [USB NFC Card Reader](http://www.amazon.com/gp/product/B00BYKPHSU?psc=1&redirect=true&ref_=oh_aui_detailpage_o04_s00) $18
-* [Wi-Fi USB Adapter](http://www.amazon.com/gp/product/B003MTTJOY?psc=1&redirect=true&ref_=oh_aui_detailpage_o07_s00) $9
+* [Raspberry Pi 3 + Case / Power](https://www.amazon.com/gp/product/B01C6EQNNK/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1) $50
+* [USB Mifare Card Reader](https://www.amazon.com/gp/product/B00BYKPHSU/ref=oh_aui_detailpage_o05_s01?ie=UTF8&psc=1) $16
 * [SD Card](http://www.amazon.com/gp/product/B00M55C0LK?psc=1&redirect=true&ref_=oh_aui_detailpage_o07_s00) $11
 * [USB Flash Drive](http://www.amazon.com/gp/product/B005FYNSZA?psc=1&redirect=true&ref_=oh_aui_detailpage_o08_s00) $8
-* [Case for Raspberry Pi 2](http://www.amazon.com/Official-Raspberry-Pi-Foundation-Model/dp/B00ZW4RKFM/ref=pd_sim_147_11?ie=UTF8&dpID=21Vhd3vo7FL&dpSrc=sims&preST=_AC_UL160_SR160%2C160_&refRID=1ZKG2697ATZRSE53RKYA) $9
-* [Mifare RFID cards](http://www.amazon.com/gp/product/B00NN6UTKY?psc=1&redirect=true&ref_=oh_aui_detailpage_o06_s00) $26
+* [Mifare RFID cards](https://www.amazon.com/gp/product/B01HC5XHH8/ref=oh_aui_detailpage_o04_s00?ie=UTF8&psc=1) $40
 * [Card protector sleeves](http://www.amazon.com/gp/product/B00B7TUIFA?psc=1&redirect=true&ref_=oh_aui_detailpage_o04_s00) $7
 * [Mini Remote Control](http://www.amazon.com/gp/product/B00RBGB91K?psc=1&redirect=true&ref_=oh_aui_detailpage_o03_s00) $13
 * [Mini USB Cables](http://www.amazon.com/gp/product/B007NLW3C2?psc=1&redirect=true&ref_=oh_aui_detailpage_o02_s00) $9
 
-=> $150
+=> $154
 
 Installation
 ============
 
-Setup WiFi
-----------
+Install Raspbian on the Pi
+-------------------------
 
-According to [this](https://techblog.willshouse.com/2013/06/11/solved-raspbian-with-edimax-ew-7811un-wifi-adapter-and-802-1x-authentication/)
-
-You should now be able to ssh into your raspberry pi.
+# Install NOOBS (https://www.raspberrypi.org/documentation/installation/noobs.md)
+# Choose Raspbian
+# Setup your wifi (top right)
+# Update configuration
+    - top left Raspberry > Preferences > Raspberry Pi Configuration
+    - boot: To CLI
+    - network at Boot: wait for network
+# Reboot
 
 Preparing your music
 --------------------
@@ -56,7 +59,6 @@ You can copy the sounds directory from this repository. And the cards.txt file w
 
 You have to populate with music directory. All that's important is that every file or directory starts with a distinct number then dash.
 
-
 Mount the USB Flash Drive
 -------------------------
 
@@ -72,6 +74,14 @@ create the mount
 
 Try it out, you should see everything on the flash drive under /mnt/bigdaddy
 
+Update Software & Pull Libraries
+--------------------------------
+
+Run this:
+
+    sudo apt-get update
+    sudo apt-get install build-essential python-dev git
+
 Setting Up Audio
 ----------------
 
@@ -85,20 +95,12 @@ Reboot:
 
 Setup the audio port:
 
-    sudo modprobe snd_bcm2835
+    sudo modprobe snd-bcm2835
     sudo amixer cset numid=3 1
 
 Turn up the volume:
 
     amixer set PCM -- -0000
-
-Update Software & Pull Libraries
---------------------------------
-
-Run this:
-
-    sudo apt-get update
-    sudo apt-get install build-essential python-dev git
 
 Downloading our software
 ------------------------
@@ -114,11 +116,6 @@ add your public key as a deploy key in the project
 try it by
 
     jukebox/bin/jukebox
-
-<!-- 
-sudo apt-get install python-dev python-pip gcc
-sudo apt-get install linux-headers-$(uname -r)
- -->
 
 Start on boot
 -------------
